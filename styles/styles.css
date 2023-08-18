@@ -1,0 +1,9 @@
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl {
+  max-width: 1200px; /* Adjust this value as needed */
+  
+}

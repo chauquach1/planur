@@ -1,11 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planur</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/styles.css">
 </head>
-<body>
-    <h1><%= user.firstName %> <%= user.lastName %>'s Detail Page</h1>
+<body class="container">
+    <%- include('../partials/nav_partial.ejs') %>
+    <div class="container shadow-lg p-0 bg-white rounded">
+        <div id="header-container" class="container text-center my-5">
+            <h1 class="my-0">Hello <%= user.firstName %> !</h1>
+            <h6>Where to Next?</h6>
+        </div>
+        <div id="form-container" class="container text-left">
+            <form action="/users/<%= user.id %>/trips" method="POST">
+                <div class="col-md-4 mb-3">
+                    <label for="tripName">Trip Name</label>
+                    <input name="tripName" type="text" class="form-control" id="tripName" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                      Valid Trip Name is required.
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="destination">Destination</label>
+                    <input name="destination" type="text" class="form-control" id="destination" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                      Valid Destination is required.
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div id="trips-container" class="container">
+            <h1>Trips</h1>
+            <ul>
+                <% if (user.trips.length) { %>
+                <% user.trips.forEach(trip => { %>
+                    <li>
+                        <a href="/users/<%= user.id %>/trips/<%= trip.id %>/edit">
+                            <%= trip.tripName %>
+                        </a>
+                        <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=DELETE" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </li>
+                <% })} else { %>
+                    <li>User has no trips!</li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

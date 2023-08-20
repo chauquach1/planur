@@ -1,6 +1,6 @@
 const app = require('express')();
 const User = require('../models/itinerary-model').User
-const Itinerary = require('../models/itinerary-model').Itinerary
+const Trip = require('../models/itinerary-model').Trip
 
 // NEW USER FORM
 app.get('/new', (req, res) => {
@@ -28,6 +28,28 @@ app.post('/', (req, res) => {
 });
 
 // CREATE NEW ITINERARY
+app.post('/:userId/trips', async (req, res) => {
+  // console.log(req.body)
+  // store new tweet in memory with data from req.body
+  try {
+    const newTrip = await Trip.create({
+      tripName: req.body.tripName,
+      destination: req.body.destination
+    })
+  
+    //find the user in the db
+    const user = await User.findById(req.params.userId)
+      // console.log(user, "USER", newTweet, "NEW TWEET")
+      //parent.child.push | document.subdocument.push
+    user.trips.push(newTrip)
+    await user.save()
+    console.log(req.body.tripName)
+    res.redirect(`/users/${user.id}`)
+  } catch (err) {
+    console.log(err.message)
+    res.send(err.message)
+  }
+})
 
 // UPDATE ITINERARY
 

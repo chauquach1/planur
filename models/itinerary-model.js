@@ -1,18 +1,25 @@
 const mongoose = require('mongoose')
 
-const itinerarySchema = new mongoose.Schema({
+const tripSchema = new mongoose.Schema({
+    accommodations: [accommodationSchema],
+    address: String,
+    dates: [dateSchema],
+    destinations: [destinationSchema],
+    guests: String,
+    pois: [poiSchema],
+    reason: String,
     tripName: String,
-    destination: String,
+    packLists: [packingListSchema]
 }, {timestamps: true})
 
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   //embed itinerary in user
-  itineraries: [itinerarySchema],
+  trips: [tripSchema],
 }, {timestamps: true})
 
 const User = mongoose.model('User', userSchema)
-const Itinerary = mongoose.model("Itinerary", itinerarySchema)
+const Trip = mongoose.model("Trip", tripSchema)
 
-module.exports = {User, Itinerary}
+module.exports = {User, Trip}

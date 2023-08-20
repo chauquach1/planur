@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
-<body>
-    <h1>Home Page</h1>
+<body class="container">
+    <%- include('./partials/nav_partial.ejs') %>
+      <div id="header-container" class="mb-5 text-center">
+        <h1 class="my-0">Welcome to Planur</h1>
+      </div>
+      <div id="button-container" class="container d-flex flex-row">
+        <div id="adv-itinerary-div" class="container col align-content-center">
+            <button type="button" class="btn btn-secondary">Advanced Itinerary</button>
+            <p>Good for Trips with Multiple Stops</p>
+            <dl>
+              <dt>Advanced Itinerary Features:</dt>
+                <dd>Tracking Multiple Travel Plans</dd>
+                <dd>Listing Hotel and Rental Accommodations</dd>
+                <dd>Creating a POI List</dd>
+                <dd>Packing List</dd>
+            </dl>
+        </div>
+        <div id="basic-itinerary-div"  class="container col align-content-center">
+            <button type="button" class="btn btn-primary">Basic Itinerary</button>
+            <p>Good for a Single Destination Trip</p>
+            <dl>
+              <dt>Basic Itinerary Features:</dt>
+                <dd>Detailing Single Travel Plan</dd>
+                <dd>Listing Accommodation</dd>
+                <dd>Packing List</dd>
+            </dl>
+        </div>
+      </div>
 </body>
 </html>

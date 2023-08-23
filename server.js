@@ -1,10 +1,10 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
+app.set('view engine', 'ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const PORT = 3000;
-var sass = require('sass')
 const User = require('./models/itinerary-model').User
 const Trip = require('./models/itinerary-model').Trip
 
@@ -26,13 +26,16 @@ app.use('/static', express.static('public'));
 app.use(express.static('public')); //use static - unchanging resources
 
 
-// Controllers
-app.use('/users', require('./controllers/users_controller'))
+// Router
+const tripsRouter = require('./controllers/trips_controller')
+const usersRouter = require('./controllers/users_controller')
 
-// Route to handle the button click and perform redirection
-app.get("/new", (req, res) => {
-  res.render("/new");
-});
+app.use('/users', usersRouter);
+app.use('/users', tripsRouter);
+
+// Controllers
+// app.use('/users', require('./controllers/users_controller'))
+// app.use('/users/:userId/trips', require('./controllers/trips_controller'))
 
 // Render Dashboard
 app.get('/', (req, res) => {

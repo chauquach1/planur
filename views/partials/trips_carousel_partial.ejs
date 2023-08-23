@@ -1,0 +1,27 @@
+<div class="container-fluid p-0">
+  <div id="recentTripsContainer" class="container mt-5">
+      <div id="recentTitleContainer" class="container mb-4 d-flex flex-row justify-content-between">
+          <h2>Recent Itineraries</h2>
+      </div>
+      <div id="tripsCarouselContainer" class="container overflow-auto d-flex flex-row align-items-center" style="height: 8rem;">
+              <% if (user.trips.length) { %>
+              <% user.trips.forEach(trip => { %>
+                <a href="/users/<%= user.id %>/trips/<%= trip.id %>" class="text-decoration-none">
+                    <div class="card bg-light mx-1" style="width: 10rem; height: 7rem;">
+                        <div class="card-header"><%= trip.startDate %> - <%= trip.endDate %></div>
+                        <div class="card-body">
+                          <h6 class="card-title text-center"><%= trip.tripName %></h6>
+                        </div>
+                    </div>
+                </a>
+              <% })} else { %>
+                  <p>User has no trips!</p>
+              <% } %>
+      </div>
+      <% if (user.trips.length) { %>
+        <div class="container d-flex flex-row-reverse">
+            <p class="m-0"><a href="/users/<%= user.id %>/trips">View All Trips</a></p>
+        </div>
+      <% } %>
+    </div>
+  </div>

@@ -1,110 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<%- include('../partials/head_partial.ejs') %>
-<body class="container">
-    <div id="content-container" class="container shadow-lg bg-light pb-4">
-        <%- include('../partials/nav_partial.ejs') %>
-        <div class="container p-0">
-            <div id="recentTripsContainer" class="container mt-5">
-                <div id="recentTitleContainer" class="container d-flex flex-row justify-content-between">
-                    <h2>Recent Itineraries</h2>
-                    <a href="/users/<%= user.id %>/trips">view list</a>
+<%- include('../partials/top_body_partial.ejs') %>
+
+<div class="container">
+    <%- include('../partials/trips_carousel_partial.ejs') %>
+    <div id="welcome-container" class="container text-center rounded bg-secondary text-white text-center p-2 my-5 bg-info" style="background-color: #0092A6; max-width:50rem">
+        <div class="container text-center">
+            <h1 class="my-0">Hello <%= user.firstName %></h1>
+            <h6>Where to Next?</h6>
+        </div>
+    </div>
+    <div id="form-container" class="container text-left overflow-auto">
+        <form action="/users/<%= user.id %>/trips" method="POST">
+            <div class="row">
+                <div id="trip-name-div" class="col-md-4 mb-3">
+                    <label for="tripName">Trip Name</label>
+                    <input name="tripName" type="text" class="form-control" id="tripName" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Trip Name is required.
+                    </div>
                 </div>
-                <div id="tripsCarouselContainer" class="container d-flex flex-row">
-                        <% if (user.trips.length) { %>
-                        <% user.trips.forEach(trip => { %>
-                            <div class="container d-flex flex-column">
-                                <a href="/users/<%= user.id %>/trips/<%= trip.id %>/edit">
-                                    <%= trip.tripName %>
-                                </a>
-                                <div class="container d-flex flex-row p-0">
-                                    <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=DELETE" method="POST">
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                    <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=PUT" method="POST">
-                                        <button type="submit">Edit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        <% })} else { %>
-                            <p>User has no trips!</p>
-                        <% } %>
+                <div id="destination-div" class="col-md-4 mb-3">
+                    <label for="destination">Destination</label>
+                    <input name="destination" type="text" class="form-control" id="destination" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Destination is required.
+                    </div>
+                </div>
+                <div id="start-date-div" class="col-md-4 mb-3">
+                    <label for="startDate">Arrival</label>
+                    <input name="startDate" type="text" class="form-control" id="startDate" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Arrival is required.
                     </div>
                 </div>
             </div>
-            <div id="header-container" class="container rounded bg-secondary text-white text-center p-2 my-5 bg-info" style="background-color: #0092A6;">
-                <h1 class="my-0">Hello <%= user.firstName %> !</h1>
-                <h6>Where to Next?</h6>
+            <div class="row">
+                <div id="endDate-div" class="col-md-4 mb-3">
+                    <label for="endDate">Departure</label>
+                    <input name="endDate" type="text" class="form-control" id="endDate" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Departure is required.
+                    </div>
+                </div>
+                <div id="guests-div" class="col-md-4 mb-3">
+                    <label for="guests">Guests</label>
+                    <input name="guests" type="text" class="form-control" id="guests" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Guests is required.
+                    </div>
+                </div>
+                <div id="reason-div" class="col-md-4 mb-3">
+                    <label for="reason">Reason</label>
+                    <input name="reason" type="text" class="form-control" id="reason" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Reason is required.
+                    </div>
+                </div>
             </div>
-            <div id="form-container" class="container text-left">
-                <form action="/users/<%= user.id %>/trips" method="POST">
-                        <div id="trip-name-div" class="col-md-4 mb-3">
-                            <label for="tripName">Trip Name</label>
-                            <input name="tripName" type="text" class="form-control" id="tripName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Trip Name is required.
-                            </div>
-                        </div>
-                        <div id="destination-div" class="col-md-4 mb-3">
-                            <label for="destination">Destination</label>
-                            <input name="destination" type="text" class="form-control" id="destination" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Destination is required.
-                            </div>
-                        </div>
-                        <div id="start-date-div" class="col-md-4 mb-3">
-                            <label for="startDate">Arrival</label>
-                            <input name="startDate" type="text" class="form-control" id="startDate" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Arrival is required.
-                            </div>
-                        </div>
-                        <div id="endDate-div" class="col-md-4 mb-3">
-                            <label for="endDate">Departure</label>
-                            <input name="endDate" type="text" class="form-control" id="endDate" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Departure is required.
-                            </div>
-                        </div>
-                        <div id="guests-div" class="col-md-4 mb-3">
-                            <label for="guests">Guests</label>
-                            <input name="guests" type="text" class="form-control" id="guests" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Guests is required.
-                            </div>
-                        </div>
-                        <div id="reason-div" class="col-md-4 mb-3">
-                            <label for="reason">Reason</label>
-                            <input name="reason" type="text" class="form-control" id="reason" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Reason is required.
-                            </div>
-                        </div>
-                        <div id="transportation-div" class="col-md-4 mb-3">
-                            <label for="transportation">Transportation</label>
-                            <input name="transportation" type="text" class="form-control" id="transportation" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Transportation is required.
-                            </div>
-                        </div>
-                        <div id="accommodation-div" class="col-md-4 mb-3">
-                            <label for="accommodation">Accommodation</label>
-                            <input name="accommodation" type="text" class="form-control" id="accommodation" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Accommodation is required.
-                            </div>
-                        </div>
-                        <div id="address-div" class="col-md-4 mb-3">
-                            <label for="address">Address</label>
-                            <input name="address" type="text" class="form-control" id="address" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                              Valid Address is required.
-                            </div>
-                        </div>
-                    <button type="submit">Generate Itinerary</button>
-                </form>
+            <div class="row">
+                <div id="transportation-div" class="col-md-4 mb-3">
+                    <label for="transportation">Transportation</label>
+                    <input name="transportation" type="text" class="form-control" id="transportation" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Transportation is required.
+                    </div>
+                </div>
+                <div id="accommodation-div" class="col-md-4 mb-3">
+                    <label for="accommodation">Accommodation</label>
+                    <input name="accommodation" type="text" class="form-control" id="accommodation" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Accommodation is required.
+                    </div>
+                </div>
+                <div id="address-div" class="col-md-4 mb-3">
+                    <label for="address">Address</label>
+                    <input name="address" type="text" class="form-control" id="address" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Address is required.
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="col d-flex flex-row justify-content-center">
+                <button class="btn btn-success" type="submit">Generate Itinerary</button>
+            </div>
+        </form>
     </div>
-</body>
-</html>
+</div>
+
+<%- include('../partials/bottom_and_footer_partial') %>

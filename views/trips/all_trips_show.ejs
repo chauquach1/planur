@@ -1,0 +1,32 @@
+<%- include('../partials/top_body_partial.ejs') %>
+
+    <div class="container p-0">
+        <div id="recentTripsContainer" class="container mt-5">
+            <div id="recentTitleContainer" class="container mb-4 d-flex flex-row justify-content-between">
+                <h2>Recent Itineraries</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex flex-col justify-content-around flex-wrap">
+
+        <% if (user.trips.length) { %>
+        <% user.trips.forEach(trip => { %>
+            <div class="card bg-light m-1 flex-shrink-5" style="width: 18rem;">
+                <a href="/users/<%= user.id %>/trips/<%= trip.id %>" class="text-black text-decoration-none">
+                    <div class="card-header"><%= trip.startDate %> - <%= trip.endDate %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4"><%= trip.tripName %></h5>
+                        <p class="card-text">
+                            Destination: <%= trip.destination %>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        <% })} else { %>
+            <p>User has no trips!</p>
+        <% } %>
+    </div>
+
+
+
+<%- include('../partials/bottom_and_footer_partial') %>

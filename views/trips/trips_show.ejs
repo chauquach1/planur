@@ -1,38 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<%- include('../partials/nav_partial.ejs') %>
-<body class="container">
-  <div id="content-container" class="container shadow-lg bg-light pb-4">
-      <%- include('../partials/nav_partial.ejs') %>
-      <div class="container p-0">
-        <div id="recentTripsContainer" class="container mt-5">
-            <div id="recentTitleContainer" class="container d-flex flex-row justify-content-between">
-                <h2>Recent Itineraries</h2>
-                <a href="/users/<%= user.id %>/trips">view list</a>
-            </div>
-            <div id="tripsCarouselContainer" class="container d-flex flex-row">
-                    <% if (user.trips.length) { %>
-                    <% user.trips.forEach(trip => { %>
-                        <div class="container d-flex flex-column">
-                            <a href="/users/<%= user.id %>/trips/<%= trip.id %>/edit">
-                                <%= trip.tripName %>
-                            </a>
-                            <div class="container d-flex flex-row p-0">
-                                <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=DELETE" method="POST">
-                                    <button type="submit">Delete</button>
-                                </form>
-                                <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=PUT" method="POST">
-                                    <button type="submit">Edit</button>
-                                </form>
-                            </div>
-                        </div>
-                    <% })} else { %>
-                        <p>User has no trips!</p>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-      </div>
-  </div>
-</body>
-</html>
+<%- include('../partials/top_body_partial.ejs') %>
+
+
+
+<%- include('../partials/bottom_and_footer_partial.ejs') %>

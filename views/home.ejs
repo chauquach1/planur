@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include('./partials/head_partial.ejs') %>
-<body class="container">
-  <div id="content-container" class="container shadow-lg bg-light pb-4">
-    <%- include('./partials/nav_partial.ejs') %>
-      <div id="header-container" class="my-5 text-center">
-        <h1 class="my-0">Welcome to Planur</h1>
-      </div>
-      <div id="sign-up-container" class="container d-flex flex-row justify-content-center mb-5">
-        <form id="redirectForm" action="/new" method="GET">
-          <button type="button" id="redirectButton" class="btn btn-primary btn-lg">Sign Up</button>
-        </form>
-      </div>
-      <div id="button-container" class="container d-flex flex-row">
-        <div id="adv-itinerary-div" class="container col align-content-center">
-            <button type="button" class="btn btn-secondary">Advanced Itinerary</button>
-            <p>Good for Trips with Multiple Stops</p>
-            <dl>
-              <dt>Advanced Itinerary Features:</dt>
-                <dd>Tracking Multiple Travel Plans</dd>
-                <dd>Listing Hotel and Rental Accommodations</dd>
-                <dd>Creating a POI List</dd>
-                <dd>Packing List</dd>
-            </dl>
-        </div>
-        <div id="basic-itinerary-div"  class="container col align-content-center">
-            <button type="button" class="btn btn-primary">Basic Itinerary</button>
-            <p>Good for a Single Destination Trip</p>
-            <dl>
-              <dt>Basic Itinerary Features:</dt>
-                <dd>Detailing Single Travel Plan</dd>
-                <dd>Listing Accommodation</dd>
-                <dd>Packing List</dd>
-            </dl>
-        </div>
-      </div>
+<%- include('./partials/top_body_partial.ejs') %>
+
+<div id="header-container" class="my-5 text-center">
+  <h1 class="my-0">Welcome to Planur</h1>
+</div>
+<div id="sign-up-container" class="container d-flex flex-row justify-content-center mb-5">
+  <form id="redirectForm" action="/new" method="GET">
+    <button type="button" id="redirectButton" class="btn btn-primary btn-lg">
+      <a class=" text-white " href="/users/new">Sign Up</a>
+    </button>
+  </form>
+</div>
+<div id="button-container" class="container d-flex flex-row">
+  <div id="adv-itinerary-div" class="container col align-content-center">
+      <button type="button" class="btn btn-secondary">Advanced Itinerary</button>
+      <p>Good for Trips with Multiple Stops</p>
+      <dl>
+        <dt>Advanced Itinerary Features:</dt>
+          <dd>Tracking Multiple Travel Plans</dd>
+          <dd>Listing Hotel and Rental Accommodations</dd>
+          <dd>Creating a POI List</dd>
+          <dd>Packing List</dd>
+      </dl>
   </div>
-</body>
-</html>
+  <div id="basic-itinerary-div"  class="container col align-content-center">
+      <button type="button" class="btn btn-primary">Basic Itinerary</button>
+      <p>Good for a Single Destination Trip</p>
+      <dl>
+        <dt>Basic Itinerary Features:</dt>
+          <dd>Detailing Single Travel Plan</dd>
+          <dd>Listing Accommodation</dd>
+          <dd>Packing List</dd>
+      </dl>
+  </div>
+</div>
+
+<%- include('./partials/bottom_and_footer_partial') %>

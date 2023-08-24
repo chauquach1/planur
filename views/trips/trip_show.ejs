@@ -1,0 +1,32 @@
+<%- include('../partials/top_body_partial.ejs') %>
+
+<div id="recentTripsContainer" class="container d-flex flex-column justify-content-center mt-5 rounded border" style="max-width: 40rem;">
+      <div class="container col text-center p-2">
+          <h2 class="m-0"><%= trip.tripName %></h2>
+          <p class="m-0"><%= trip.startDate %> - <%= trip.endDate %></p>
+      </div>
+</div>
+
+<div class="container-fluid d-flex flex-column justify-content-around flex-wrap align-bottom">
+<p class="text-end">Edit Trip</p>
+<h3 class="text-center mb-4">Trip Details</h3>
+<div id="trip-details-container" class="container">
+  <div class="container d-flex align-items-baseline lh-base">
+    <div></div>
+    <h2 class="align-self-baseline me-2">Destination:</h2>
+    <p class="align-self-baseline"> <%= trip.destination %></p>
+  </div>
+
+  <h2>Address: <%= trip.address %></h2>
+  <h2>Travelers: <%= trip.guests %></h2>
+  <h2>Reason: <%= trip.reason %></h2>
+  <h2>Transportation: <%= trip.transportation %></h2>
+  <h2>Accommodation: <%= trip.accommodation %></h2>
+  <h2>Stops: <%= trip.stops %></h2>
+  <h2>Packing List: <%= trip.packingLists %></h2>
+</div>
+
+
+</div>
+
+<%- include('../partials/bottom_and_footer_partial.ejs') %>

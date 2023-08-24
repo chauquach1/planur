@@ -11,9 +11,18 @@ app.get('/new', (req, res) => {
 // SHOW SINGLE TRIP PAGE
 app.get('/:userId/trips/:tripId', async (req, res) => {
   try {
-      const user = await User.findById(req.params.userId)
-      const trip = user.trips.id(req.params.tripId)
-      res.render(`trips/trips_show.ejs`, {trip})
+      const user = await User.findById(req.params.userId);
+      const trip = user.trips.id(req.params.tripId);
+
+      // const stops = Object.keys(trip.toJSON()); // Convert to plain object and get keys
+
+      // console.log each key in trip
+        // for (const key of tripKeys) {
+        //     console.log(key);
+        // }
+
+      // res.json(trip); // Send the trip data as a response
+      res.render(`trips/trip_show.ejs`, {trip, user})
     } catch (err) {
         console.log(err.message)
         res.send(err.message)

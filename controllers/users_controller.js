@@ -49,7 +49,8 @@ app.post('/:userId/trips', async (req, res) => {
       endDate: req.body.endDate,
       guests: req.body.guests,
       reason: req.body.reason,
-      transportation: req.body.transportation
+      transportation: req.body.transportation,
+      address: req.body.address
     })
   
     //find the user in the db
@@ -74,7 +75,7 @@ app.put('/:userId/trips/:tripId', async (req, res) => {
   //find the user (the parent doc) in db by its id
   const user = await User.findById(userId)
   //find the tweet the user has embedded
-  const foundTrip = user.trips.id(tripId)
+  // const foundTrip = user.trips.id(tripId)
   // foundTrip.trip = await req.body.trip
   await user.save()
   res.redirect(`/users/${user.id}`)

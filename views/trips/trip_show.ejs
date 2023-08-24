@@ -1,30 +1,75 @@
 <%- include('../partials/top_body_partial.ejs') %>
 
 <div id="recentTripsContainer" class="container d-flex flex-column justify-content-center mt-5 rounded border" style="max-width: 40rem;">
-      <div class="container col text-center p-2">
-          <h2 class="m-0"><%= trip.tripName %></h2>
-          <p class="m-0"><%= trip.startDate %> - <%= trip.endDate %></p>
+    <div class="container col text-center p-2">
+        <h2 class="m-0"><%= trip.tripName %></h2>
+        <p class="m-0"><%= trip.startDate %> - <%= trip.endDate %></p>
+    </div>
+</div>
+
+<div class="container-fluid d-flex flex-column align flex-wrap align-bottom">
+    <h3 class="text-center my-4">Trip Details</h3>
+
+    <div id="trip-details-container" class="container d-flex flex-row border rounded flex-wrap justify-content-around pt-3" style="max-width: 45rem; font-size: 1.2rem;">
+      <div class="container d-inline-flex flex-row flex-wrap">
+        <div class="col d-inline-flex flex-row p-0 flex-wrap text-wrap">
+          <h5 class="align-self-baseline me-2">Destination: </h5>
+          <p class="align-self-baseline"><%= trip.destination %></p>
+        </div>
+
+        <div class="col d-inline-flex flex-row p-0 flex-wrap text-wrap">
+          <h5 class="align-self-baseline me-2">Address:</h5>
+          <p class="align-self-baseline">10895 Vereda Sol Del Dios, San Diego, CA 92130</p>
+        </div>
       </div>
-</div>
 
-<div class="container-fluid d-flex flex-column justify-content-around flex-wrap align-bottom">
-<p class="text-end">Edit Trip</p>
-<h3 class="text-center mb-4">Trip Details</h3>
-<div id="trip-details-container" class="container">
-  <div class="container d-flex align-items-baseline lh-base">
-    <div></div>
-    <h2 class="align-self-baseline me-2">Destination:</h2>
-    <p class="align-self-baseline"> <%= trip.destination %></p>
-  </div>
+      <div class="container justify-content-between d-flex flex-row flex-wrap border-top pt-2">
+        <div class="d-inline-flex flex-row p-0 flex-wrap">
+          <h5 class="align-self-baseline me-2">Travelers:</h5>
+          <p class="align-self-baseline"><%= trip.guests %></p>
+        </div>
 
-  <h2>Address: <%= trip.address %></h2>
-  <h2>Travelers: <%= trip.guests %></h2>
-  <h2>Reason: <%= trip.reason %></h2>
-  <h2>Transportation: <%= trip.transportation %></h2>
-  <h2>Accommodation: <%= trip.accommodation %></h2>
-  <h2>Stops: <%= trip.stops %></h2>
-  <h2>Packing List: <%= trip.packingLists %></h2>
-</div>
+        <div class="d-inline-flex flex-row p-0 flex-wrap">
+          <h5 class="align-self-baseline me-2">Reason:</h5>
+          <p class="align-self-baseline"><%= trip.reason %></p>
+        </div>
+
+        <div class="d-inline-flex flex-row p-0 flex-wrap">
+          <h5 class="align-self-baseline me-2">Transportation:</h5>
+          <p class="align-self-baseline"><%= trip.transportation %></p>
+        </div>
+      </div>
+    </div>
+    <div class="container flex-row flex-wrap pe-2 text-end" style="max-width: 45rem; font-size: 1rem;">
+          <a href="" class="text-decoration-none">Edit Trip Details</a>
+    </div>
+
+    <div id="trip-details-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3 text-start" style="max-width: 45rem; font-size: 1rem;">
+      <h3>Accommodations: <%= trip.accommodation %></h3>
+      <div id="accommodations-container" class="container f-flex flex-column border-top p-1">
+          <% if (trip.accommodation.length === 0) { %>
+            <a href="" class="text-decoration-none">Add Accommodation Details</a>
+          <% } %>
+      </div>
+    </div>
+
+    <div id="trip-details-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
+      <h3>Stops: <%= trip.stops %></h3>
+      <div id="stops-container" class="container f-flex flex-column border-top p-1">
+          <% if (trip.stops.length === 0) { %>
+            <a href="" class="text-decoration-none">Add Stop Details</a>
+          <% } %>
+      </div>
+    </div>
+
+    <div id="trip-details-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
+      <h3>Packing List: <%= trip.packingLists %></h3>
+      <div id="packinglist-container" class="container f-flex flex-column border-top p-1">
+          <% if (trip.packLists.length === 0) { %>
+            <a href="" class="text-decoration-none">Add Packing Lists</a>
+          <% } %>
+      </div>
+    </div>
 
 
 </div>

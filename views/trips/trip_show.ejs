@@ -1,15 +1,17 @@
 <%- include('../partials/top_body_partial.ejs') %>
 
-<div id="recentTripsContainer" class="container d-flex flex-column justify-content-center mt-5 rounded border" style="max-width: 40rem;">
+<div id="currTripContainer" class="container d-flex flex-column justify-content-center mt-5 rounded border" style="max-width: 40rem;">
     <div class="container col text-center p-2">
         <h2 class="m-0"><%= trip.tripName %></h2>
         <p class="m-0"><%= trip.startDate %> - <%= trip.endDate %></p>
     </div>
 </div>
 
+<!-- full trip details container -->
 <div class="container-fluid d-flex flex-column align flex-wrap align-bottom">
     <h3 class="text-center my-4">Trip Details</h3>
 
+    <!-- basic trip details container -->
     <div id="trip-details-container" class="container d-flex flex-row border rounded flex-wrap justify-content-around pt-3" style="max-width: 45rem; font-size: 1.2rem;">
       <div class="container d-inline-flex flex-row flex-wrap">
         <div class="col d-inline-flex flex-row p-0 flex-wrap text-wrap">
@@ -19,7 +21,7 @@
 
         <div class="col d-inline-flex flex-row p-0 flex-wrap text-wrap">
           <h5 class="align-self-baseline me-2">Address:</h5>
-          <p class="align-self-baseline">10895 Vereda Sol Del Dios, San Diego, CA 92130</p>
+          <p class="align-self-baseline"><%= trip.address %></p>
         </div>
       </div>
 
@@ -40,11 +42,57 @@
         </div>
       </div>
     </div>
-    <div class="container flex-row flex-wrap pe-2 text-end" style="max-width: 45rem; font-size: 1rem;">
-          <a href="" class="text-decoration-none">Edit Trip Details</a>
-    </div>
+    <!-- edit trip modal trigger -->
+    <section class="bg-light mb-3">
+      <div class="container flex-row flex-wrap pe-2 text-end" style="max-width: 45rem; font-size: 1rem;">
+        <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#edit-trip-details-modal">
+          Edit Trip Details
+        </a>
+      </div>
+    </section>
+    <!-- edit-trip-details modal -->
+    <div class="modal fade" id="edit-trip-details-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title"> Edit Trip Details</h5>
+            <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+              <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=PUT" method="POST">
+                  <label for="tripName">Trip Name</label>
+                  <input name="tripName" type="text" class="form-control mb-3" id="tripName" value="<%= trip.tripName %>">
 
-    <div id="trip-details-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3 text-start" style="max-width: 45rem; font-size: 1rem;">
+                  <label for="startDate">Arrival</label>
+                  <input name="startDate" type="text" class="form-control mb-3" id="startDate" value="<%= trip.startDate %>">
+
+                  <label for="endDate">Departure</label>
+                  <input name="endDate" type="text" class="form-control mb-3" id="endDate" value="<%= trip.endDate %>">
+
+                  <label for="destination">Destination</label>
+                  <input name="destination" type="text" class="form-control mb-3" id="destination" value="<%= trip.destination %>">
+
+                  <label for="address">Address</label>
+                  <input name="address" type="text" class="form-control mb-3" id="address" value="<%= trip.address %>">
+
+                  <label for="guests">Travelers</label>
+                  <input name="guests" type="text" class="form-control mb-3" id="guests" value="<%= trip.guests %>">
+
+                  <label for="reason">Reason</label>
+                  <input name="reason" type="text" class="form-control mb-3" id="reason" value="<%= trip.reason %>">
+
+                  <label for="transportation">Transportation</label>
+                  <input name="transportation" type="text" class="form-control mb-3" id="transportation" value="<%= trip.transportation %>">
+
+                  <button class="btn btn-success" type="submit">Update Itinerary</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- accommodations container -->
+    <div id="accommodations-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3 text-start" style="max-width: 45rem; font-size: 1rem;">
       <h3>Accommodations: <%= trip.accommodation %></h3>
       <div id="accommodations-container" class="container f-flex flex-column border-top p-1">
           <% if (trip.accommodation.length === 0) { %>
@@ -53,7 +101,8 @@
       </div>
     </div>
 
-    <div id="trip-details-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
+    <!-- stops container -->
+    <div id="stops-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
       <h3>Stops: <%= trip.stops %></h3>
       <div id="stops-container" class="container f-flex flex-column border-top p-1">
           <% if (trip.stops.length === 0) { %>
@@ -62,9 +111,10 @@
       </div>
     </div>
 
-    <div id="trip-details-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
+    <!-- packing list container -->
+    <div id="packLists-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
       <h3>Packing List: <%= trip.packingLists %></h3>
-      <div id="packinglist-container" class="container f-flex flex-column border-top p-1">
+      <div id="packLists-container" class="container f-flex flex-column border-top p-1">
           <% if (trip.packLists.length === 0) { %>
             <a href="" class="text-decoration-none">Add Packing Lists</a>
           <% } %>

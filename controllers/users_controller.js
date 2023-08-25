@@ -67,21 +67,6 @@ app.post('/:userId/trips', async (req, res) => {
   }
 })
 
-// UPDATE ITINERARY (PUT)
-app.put('/:userId/trips/:tripId', async (req, res) => {
-  //set the value of the user and tweet ids
-  const userId = req.params.userId
-  const tripId = req.params.tripId
-  //find the user (the parent doc) in db by its id
-  const user = await User.findById(userId)
-  //find the tweet the user has embedded
-  // const foundTrip = user.trips.id(tripId)
-  // foundTrip.trip = await req.body.trip
-  await user.save()
-  res.redirect(`/users/${user.id}`)
-})
-
-
 // DELETE ITINERARY (DELETE)
 app.delete('/:userId/trips/:tripsId', async (req, res) => {
   //set the value of the user and tweet ids

@@ -68,8 +68,8 @@ app.post('/:userId/trips', async (req, res) => {
   
     //find the user in the db
     const user = await User.findById(req.params.userId)
-      // console.log(user, "USER", newTweet, "NEW TWEET")
-      //parent.child.push | document.subdocument.push
+
+    //parent.child.push | document.subdocument.push
     user.trips.push(newTrip)
     await user.save()
     console.log(req.body)
@@ -81,10 +81,43 @@ app.post('/:userId/trips', async (req, res) => {
 })
 
 // UPDATE ITINERARY (PUT)
+app.put('/:userId/trips/:tripsId', async (req, res) => {
+try {
+    const userId = req.params.userId;
+    const tripsId = req.params.tripsId;
+
+    const user = await User.findById(userId);
+    const trip = user.trips.id(tripsId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    
+    
+    if (!trip) {
+      return res.status(404).send('Trip not found');
+    }
+    // Update trip properties
+    trip.tripName = req.body.tripName;
+    trip.startDate = req.body.startDate;
+    trip.endDate = req.body.endDate;
+    trip.destination = req.body.destination;
+    trip.guests = req.body.guests;
+    trip.reason = req.body.reason;
+    trip.address = req.body.address;
+    trip.transportation = req.body.transportation;
+
+    await user.save();
+
+    res.redirect(`/users/${user.id}/trips/${trip.id}`)
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('An error occurred');
+  }
+});
 
 // DELETE ITINERARY (DELETE)
 app.delete('/:userId/trips/:tripsId', async (req, res) => {
-  //set the value of the user and tweet ids
+  //set the value of the user and trip ids
   const userId = req.params.userId
   const tripsId = req.params.tripsId
   //find the user (the parent doc) in db by its id

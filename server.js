@@ -7,7 +7,9 @@ const methodOverride = require('method-override');
 const PORT = 3000;
 const User = require('./models/itinerary-model').User
 const Trip = require('./models/itinerary-model').Trip
-
+const Stop = require('./models/itinerary-model').Stop
+const Accommodation = require('./models/itinerary-model').Accommodation
+const Poi = require('./models/itinerary-model').Poi
 
 
 // mongo
@@ -29,13 +31,12 @@ app.use(express.static('public')); //use static - unchanging resources
 // Router
 const tripsRouter = require('./controllers/trips_controller')
 const usersRouter = require('./controllers/users_controller')
+const detailsRouter = require('./controllers/trip_details_controller')
 
 app.use('/users', usersRouter);
 app.use('/users', tripsRouter);
+app.use('/users', detailsRouter);
 
-// Controllers
-// app.use('/users', require('./controllers/users_controller'))
-// app.use('/users/:userId/trips', require('./controllers/trips_controller'))
 
 // Render Dashboard
 app.get('/', (req, res) => {
@@ -60,6 +61,12 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 // delete all trips documents
     // Trip.deleteMany({}).then((trips) => {
     //   console.log(trips);
+    //   db.close()
+    // })
+//
+// delete all accommodation documents
+    // Accommodation.deleteMany({}).then((accommodations) => {
+    //   console.log(accommodations);
     //   db.close()
     // })
 //

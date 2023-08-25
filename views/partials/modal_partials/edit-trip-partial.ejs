@@ -1,0 +1,48 @@
+    <!-- edit trip modal trigger -->
+    <section class="bg-light mb-3">
+      <div class="container flex-row flex-wrap pe-2 text-end" style="max-width: 45rem; font-size: 1rem;">
+        <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#edit-trip-details-modal">
+          Edit Trip Details
+        </a>
+      </div>
+    </section>
+    <!-- edit-trip-details modal -->
+    <div class="modal fade" id="edit-trip-details-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title"> Edit Trip Details</h5>
+            <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+              <form action="/users/<%= user.id %>/trips/<%= trip.id %>?_method=PUT" method="POST">
+                  <label for="tripName">Trip Name</label>
+                  <input name="tripName" type="text" class="form-control mb-3" id="tripName" value="<%= trip.tripName %>">
+
+                  <label for="startDate">Arrival</label>
+                  <input name="startDate" type="text" class="form-control mb-3" id="startDate" value="<%= trip.startDate %>">
+
+                  <label for="endDate">Departure</label>
+                  <input name="endDate" type="text" class="form-control mb-3" id="endDate" value="<%= trip.endDate %>">
+
+                  <label for="destination">Destination</label>
+                  <input name="destination" type="text" class="form-control mb-3" id="destination" value="<%= trip.destination %>">
+
+                  <label for="address">Address</label>
+                  <input name="address" type="text" class="form-control mb-3" id="address" value="<%= trip.address %>">
+
+                  <label for="guests">Travelers</label>
+                  <input name="guests" type="text" class="form-control mb-3" id="guests" value="<%= trip.guests %>">
+
+                  <label for="reason">Reason</label>
+                  <input name="reason" type="text" class="form-control mb-3" id="reason" value="<%= trip.reason %>">
+
+                  <label for="transportation">Transportation</label>
+                  <input name="transportation" type="text" class="form-control mb-3" id="transportation" value="<%= trip.transportation %>">
+
+                  <button class="btn btn-success" type="submit">Update Itinerary</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,40 @@
+    <!-- add accom modal trigger -->
+    <section class="bg-light align-self-baseline">
+        <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#add-accom-details-modal">
+          Add Accommodation
+        </a>
+    </section>
+    <!-- add-accom-details modal -->
+    <div class="modal fade" id="add-accom-details-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title"> Add Accommodation Details</h5>
+            <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+              <form action="/users/<%= user.id %>/trips/<%= trip.id %>/accommodations" method="POST">
+                  <label for="accomName">Accommodation Name</label>
+                  <input name="accomName" type="text" class="form-control mb-3" id="accomName" value="">
+
+                  <label for="accomType">Accommodation Type</label>
+                  <input name="accomType" type="text" class="form-control mb-3" id="accomType" value="">
+
+                  <label for="accomAdd">Address</label>
+                  <input name="accomAdd" type="text" class="form-control mb-3" id="accomAdd" value="">
+
+                  <label for="accomPhone">Phone Number</label>
+                  <input name="accomPhone" type="text" class="form-control mb-3" id="accomPhone" value="">
+
+                  <label for="accomEmail">Email</label>
+                  <input name="accomEmail" type="text" class="form-control mb-3" id="accomEmail" value="">
+
+                  <label for="accomRes">Reservation or Confirmation #</label>
+                  <input name="accomRes" type="text" class="form-control mb-3" id="accomRes" value="">
+
+                  <button class="btn btn-success" type="submit">Update Itinerary</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>

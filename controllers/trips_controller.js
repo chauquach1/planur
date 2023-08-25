@@ -3,7 +3,7 @@ const app = express.Router();
 const User = require('../models/itinerary-model').User
 const Trip = require('../models/itinerary-model').Trip
 
-// NEW TRIP FORM
+// NEW USERS FORM
 app.get('/new', (req, res) => {
   res.render('users/new.ejs')
 })
@@ -13,15 +13,6 @@ app.get('/:userId/trips/:tripId', async (req, res) => {
   try {
       const user = await User.findById(req.params.userId);
       const trip = user.trips.id(req.params.tripId);
-
-      // const stops = Object.keys(trip.toJSON()); // Convert to plain object and get keys
-
-      // console.log each key in trip
-        // for (const key of tripKeys) {
-        //     console.log(key);
-        // }
-
-      // res.json(trip); // Send the trip data as a response
       res.render(`trips/trip_show.ejs`, {trip, user})
     } catch (err) {
         console.log(err.message)
@@ -47,13 +38,9 @@ app.get('/:userId/trips', async (req, res) => {
   }
 })
 
-// CREATE NEW TRIP
-
 
 // CREATE NEW ITINERARY (POST)
 app.post('/:userId/trips', async (req, res) => {
-  // console.log(req.body)
-  // store new tweet in memory with data from req.body
   try {
     const newTrip = await Trip.create({
       tripName: req.body.tripName,
@@ -96,7 +83,7 @@ try {
     if (!trip) {
       return res.status(404).send('Trip not found');
     }
-    // Update trip properties
+    // Update trip details
     trip.tripName = req.body.tripName;
     trip.startDate = req.body.startDate;
     trip.endDate = req.body.endDate;
@@ -105,6 +92,32 @@ try {
     trip.reason = req.body.reason;
     trip.address = req.body.address;
     trip.transportation = req.body.transportation;
+
+    try {
+      const updatedTrip = await Trip.findOneAndUpdate(
+        { _id: tripsId },
+        {
+          tripName: req.body.tripName,
+          startDate: req.body.startDate,
+          endDate: req.body.endDate,
+          destination: req.body.destination,
+          guests: req.body.guests,
+          reason: req.body.reason,
+          address: req.body.address,
+          transportation: req.body.transportation
+        },
+        { new: true } // This option returns the updated document
+      ).exec();
+    
+      if (updatedTrip) {
+        console.log('Updated Trip:', updatedTrip);
+      } else {
+        console.log('Trip not found');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle the error
+    }
 
     await user.save();
 

@@ -14,7 +14,10 @@ const poiSchema = new mongoose.Schema({
 const accommodationSchema = new mongoose.Schema({
   name: String,
   type: String,
-  accomDetails: [poiSchema]
+  address: String,
+  phoneNumber: String,
+  email: String,
+  resNum: String
 }, {timestamps: true})
 
 const stopSchema = new mongoose.Schema({
@@ -68,7 +71,7 @@ const packingListSchema = new mongoose.Schema({
 })
 
 const tripSchema = new mongoose.Schema({
-    accommodation: [accommodationSchema],
+    accommodations: [accommodationSchema],
     address: String,
     destination: String,
     startDate: String,

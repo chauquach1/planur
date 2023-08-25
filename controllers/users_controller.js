@@ -8,14 +8,6 @@ app.get('/new', (req, res) => {
   res.render('users/new.ejs')
 })
 
-// // SHOW SINGLE TRIP PAGE
-// app.get('/:userId/trips/:tripId', async (req, res) => {
-//   //find the user (the parent doc) in db by its id
-//   const user = await User.findById(req.params.userId)
-//   //find the trip the user has embedded
-//   const trip = user.trips.id(req.params.tripId)
-//   res.render(`trips/trips_show.ejs`, {trip})
-// })
 
 // SHOW USER PAGE
 app.get('/:userId', async(req, res) => {
@@ -23,6 +15,7 @@ app.get('/:userId', async(req, res) => {
   let user = await User.findById(req.params.userId)
   res.render('users/show.ejs', {user})
 })
+
 
 // CREATE NEW USER
 app.post('/', (req, res) => {
@@ -36,6 +29,7 @@ app.post('/', (req, res) => {
       // Handle the error appropriately (e.g., send an error response)
     });
 });
+
 
 // CREATE NEW ITINERARY (POST)
 app.post('/:userId/trips', async (req, res) => {
@@ -66,6 +60,7 @@ app.post('/:userId/trips', async (req, res) => {
     res.send(err.message)
   }
 })
+
 
 // DELETE ITINERARY (DELETE)
 app.delete('/:userId/trips/:tripsId', async (req, res) => {

@@ -31,11 +31,15 @@ app.use(express.static('public')); //use static - unchanging resources
 // Router
 const tripsRouter = require('./controllers/trips_controller')
 const usersRouter = require('./controllers/users_controller')
-const detailsRouter = require('./controllers/trip_details_controller')
+const detailsRouter = require('./controllers/accommodations_controller')
+const stopsRouter = require('./controllers/stops_controller')
+// const packListsRouter = require('./controllers/packing_lists_controller')
 
 app.use('/users', usersRouter);
 app.use('/users', tripsRouter);
 app.use('/users', detailsRouter);
+app.use('/users', stopsRouter);
+// app.use('/users', packListsRouter);
 
 
 // Render Dashboard
@@ -70,6 +74,12 @@ db.on('disconnected', () => console.log('mongo disconnected'))
     //   db.close()
     // })
 //
+// delete all stop documents
+    // Stop.deleteMany({}).then((stops) => {
+    //   console.log(stops);
+    //   db.close()
+    // })
+//
 
 // update multiple documents
     // User.updateMany({}).then((users) => {
@@ -78,6 +88,14 @@ db.on('disconnected', () => console.log('mongo disconnected'))
     // })
     // Trip.updateMany({}).then((trips) => {
     //   console.log(trips);
+    //   db.close()
+    // })
+    // Accommodation.updateMany({}).then((accommodations) => {
+    //   console.log(accommodations);
+    //   db.close()
+    // })
+    // Stop.updateMany({}).then((stops) => {
+    //   console.log(stops);
     //   db.close()
     // })
 

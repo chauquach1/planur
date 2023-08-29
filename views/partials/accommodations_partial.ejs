@@ -1,10 +1,46 @@
-<div class="container d-flex">
-  <div class="row">
-    <h2><%- accommodation.name -%></h2>
-    <h2><%- accommodation.type -%></h2>
-    <h2><%- accommodation.address -%></h2>
-    <h2><%- accommodation.phoneNumber -%></h2>
-    <h2><%- accommodation.email -%></h2>
-    <h2><%- accommodation.resNum -%></h2>
+<div class="container d-flex flex-column px-2 pb-2 mb-4 bg-secondary-subtle border rounded">
+  
+  <div class="align-items-baseline text-wrap flex-wrap">
+    <p id="accomName" class="align-self-baseline m-0 fs-3 fw-bold text-info"><%- accommodation.name -%></p>
   </div>
+  
+  <div class="d-flex flex-row border-bottom border-black flex-wrap pb-2 mb-2">
+      <div class="d-inline-flex text-wrap flex-wrap me-4">
+        <label for="accomType" class="fw-bold me-2">Type:</label>
+        <p id="accomType" class="align-self-baseline my-0 fs-6"><%- accommodation.type -%></p>
+      </div>
+      
+      <div class="d-inline-flex text-wrap flex-wrap me-4">
+        <label for="checkIn" class="fw-bold me-2">Check In:</label>
+        <p id="checkIn" class="align-self-baseline my-0 fs-6"><%- accommodation.checkIn -%></p>
+      </div>
+      
+      <div class="d-inline-flex text-wrap flex-wrap me-4">
+        <label for="checkOut" class="fw-bold me-2">Check Out:</label>
+        <p id="checkOut" class="align-self-baseline my-0 fs-6"><%- accommodation.checkOut -%></p>
+      </div>
+  </div>
+
+  <div class="d-inline-flex text-wrap flex-wrap">
+    <label for="accomAddress" class="fw-bold me-2">Address:</label>
+    <p id="accomAddress" class="align-self-baseline my-0 fs-6"><%- accommodation.address -%></p>
+  </div>
+  
+  <div class="d-flex flex-row flex-wrap">
+      <div class="d-inline-flex text-wrap flex-wrap me-4">
+        <label for="accomPhone" class="fw-bold me-2">Phone Number:</label>
+        <p id="accomPhone" class="align-self-baseline my-0 fs-6"><%- accommodation.phoneNumber -%></p>
+      </div>
+      
+      <div class="d-inline-flex text-wrap flex-wrap">
+        <label for="accomEmail" class="fw-bold me-2">Email:</label>
+        <p id="accomEmail" class="align-self-baseline my-0 fs-6"><%- accommodation.email -%></p>
+      </div>
+  </div>
+  
+  <div class="d-flex flex-row text-wrap flex-wrap">
+    <label for="accomResNum" class="fw-bold me-2">Reservation/Confirmation Number: </label>
+    <p id="accomResNum" class="align-self-baseline my-0 fs-6"><%- accommodation.resNum -%></p>
+  </div>
+  <%- include('./modal_partials/edit_accommodations_partial.ejs') %>
 </div>

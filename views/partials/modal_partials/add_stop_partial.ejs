@@ -1,0 +1,49 @@
+<!-- add stop modal trigger -->
+<section class="bg-light align-self-baseline">
+  <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#add-stop-details-modal">
+    Add Stop
+  </a>
+</section>
+<!-- add-stop-details modal -->
+<div class="modal fade" id="add-stop-details-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-title"> Add Stop Details</h5>
+      <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+    </div>
+    <div class="modal-body">
+        <form action="/users/<%= user.id %>/trips/<%= trip.id %>/stops" method="POST">
+            <label for="stopName">Stop Name</label>
+            <input name="stopName" type="text" class="form-control mb-3" id="stopName" value="">
+
+            <label for="stopAdd">Address</label>
+            <input name="stopAdd" type="text" class="form-control mb-3" id="stopAdd" value="">
+
+            <label for="stopType">Type</label>
+            <input name="stopType" type="text" class="form-control mb-3" id="stopType" value="">
+
+            <label for="arrival">Arrival</label>
+            <input name="arrival" type="text" class="form-control mb-3" id="arrival" value="">
+
+            <label for="departure">Departure</label>
+            <input name="departure" type="text" class="form-control mb-3" id="departure" value="">
+
+            <label for="interest">Interest Level</label>
+            <input name="interest" type="text" class="form-control mb-3" id="interest" value="">
+
+            <label for="transportation">Transportation</label>
+            <input name="transportation" type="text" class="form-control mb-3" id="transportation" value="">
+            
+            <label for="stopRes">Reservation/Confirmation #:</label>
+            <input name="stopRes" type="text" class="form-control mb-3" id="stopRes" value="">
+            
+            <label for="stopNotes" class="form-label">Notes</label>
+            <textarea name="stopNotes" class="form-control mb-3" id="stopNotes" rows="3"></textarea>
+
+            <button class="btn btn-success" type="submit">Add Stop</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

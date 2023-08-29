@@ -1,0 +1,73 @@
+<!-- edit trip modal trigger -->
+<section>
+  <div class="container flex-row flex-wrap pe-2 text-end" style="max-width: 45rem; font-size: 1rem;">
+    <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#edit-accommodation-modal">
+      Edit Accommodation
+    </a>
+  </div>
+</section>
+<!-- edit-trip-details modal -->
+<div class="modal fade" id="edit-accommodation-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title"> Edit Accommodation Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/users/<%= user.id %>/trips/<%= trip.id %>/accommodations/<%= accommodation.id %>?_method=PUT" method="POST">
+            <label for="accomName">Accommodation</label>
+            <input name="accomName" type="text" class="form-control mb-3" id="accomName" value="<%= accommodation.name %>">
+
+            <label for="accomType">Type</label>
+            <input name="accomType" type="text" class="form-control mb-3" id="accomType" value="<%= accommodation.type %>">
+
+            <label for="checkIn">Check In</label>
+            <input name="checkIn" type="text" class="form-control mb-3" id="checkIn" value="<%= accommodation.checkIn %>">
+
+            <label for="checkOut">Check Out</label>
+            <input name="checkOut" type="text" class="form-control mb-3" id="checkOut" value="<%= accommodation.checkOut %>">
+
+            <label for="accomAdd">Address</label>
+            <input name="accomAdd" type="text" class="form-control mb-3" id="accomAdd" value="<%= accommodation.address %>">
+
+            <label for="accomPhone">Phone Number</label>
+            <input name="accomPhone" type="text" class="form-control mb-3" id="accomPhone" value="<%= accommodation.phoneNumber %>">
+
+            <label for="accomEmail">Email</label>
+            <input name="accomEmail" type="text" class="form-control mb-3" id="accomEmail" value="<%= accommodation.email %>">
+
+            <label for="accomRes">Reservation or Confirmation Number:</label>
+            <input name="accomRes" type="text" class="form-control mb-3" id="accomRes" value="<%= accommodation.resNum %>">
+            
+            <button class="btn btn-success" type="submit">Update</button>
+          </form>
+          <button class="btn btn-danger mt-3" data-bs-target="#delete-accommodation-modal" data-bs-toggle="modal">Remove</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- delete-trip-details modal -->
+<div class="modal fade" id="delete-accommodation-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title"> Delete Accommodation</h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+        </div>
+        <div class="modal-body">
+          <p>If you wish to remove this accommodation, please hit "Delete".</p>
+        </div>
+        <div class="modal-footer">
+          <!-- DELETE ACCOMMODATION FORM -->
+          <button class="btn btn-primary" data-bs-target="#edit-accommodation-modal" data-bs-toggle="modal">
+            Back to Edit
+          </button>
+          <form action="/users/<%= user.id %>/trips/<%= trip.id %>/accommodations/<%= accommodation.id %>?_method=DELETE" method="POST"> 
+            <button class="btn btn-danger" type="submit">Delete</button>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>

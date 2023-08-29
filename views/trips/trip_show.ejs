@@ -1,54 +1,55 @@
 <%- include('../partials/top_body_partial.ejs') %>
 
-<div id="currTripContainer" class="container d-flex flex-column justify-content-center mt-5 rounded border" style="max-width: 40rem;">
-    <div class="container col text-center p-2">
+<div id="currTripContainer" class="container-fluid d-flex flex-column justify-content-center mt-5" >
+  <div id="trip-details-container" class="container d-flex flex-row flex-wrap border rounded justify-content-around pt-3 px-0" style="max-width: 45rem; font-size: 1.2rem;">
+      <div class="container col text-center p-2 px-0 mb-2 bg-secondary-subtle" style="max-width: 45rem">
         <h2 class="m-0"><%= trip.tripName %></h2>
         <p class="m-0"><%= trip.startDate %> - <%= trip.endDate %></p>
+      </div>
+
+      <div class="container d-flex flex-column flex-wrap mb-2 px-2">
+        <div class="col d-flex flex-row p-0 flex-wrap align-items-end">
+          <label for="tripDest" class="fw-bold me-2 mb-0 fs-6">Destination:</label>
+          <p id="tripDest" class="align-self-end my-0 fs-6"><%- trip.destination -%></p>
+        </div>
+      
+        <div class="col d-flex flex-row p-0 flex-wrap align-items-end">
+          <label for="tripAdd" class="fw-bold me-2 mb-0 fs-6">Address:</label>
+          <p id="tripAdd" class="align-self-end my-0 fs-6">10895 Vereda Sol Del Dios, San Diego, CA 92130</p>
+        </div>
+      </div>
+
+      <div class="container border-top pt-2 px-0 mb-2 mx-2">
+        <div class="row justify-content-around">
+          <div class="col-md d-flex flex-row">
+            <h5 class="align-self-baseline me-2 mb-0 fs-6">Travelers:</h5>
+            <p class="align-self-baseline mb-0 fs-6"><%= trip.guests %></p>
+          </div>
+      
+          <div class="col-md d-flex flex-row">
+            <h5 class="align-self-baseline me-2 mb-0 fs-6">Reason:</h5>
+            <p class="align-self-baseline mb-0 fs-6"><%= trip.reason %></p>
+          </div>
+      
+          <div class="col-md d-flex flex-row">
+            <h5 class="align-self-baseline me-2 mb-0 fs-6">Transportation:</h5>
+            <p class="align-self-baseline mb-0 fs-6"><%= trip.transportation %></p>
+          </div>
+        </div>
+      </div>
+      
     </div>
+    <%- include('../partials/modal_partials/edit-trip-partial') %>
 </div>
 
 <!-- full trip details container -->
 <div class="container-fluid d-flex flex-column align flex-wrap align-bottom">
-    <h3 class="text-center my-4">Trip Details</h3>
-
-    <!-- basic trip details container -->
-    <div id="trip-details-container" class="container d-flex flex-row border rounded flex-wrap justify-content-around pt-3" style="max-width: 45rem; font-size: 1.2rem;">
-      <div class="container d-inline-flex flex-column flex-wrap justify-content-between">
-        <div class="col d-inline-flex flex-row p-0 flex-wrap">
-          <h5 class="align-self-baseline me-2">Destination: </h5>
-          <p class="align-self-baseline text-wrap"><%- trip.destination -%></p>
-        </div>
-
-        <div class="col d-inline-flex flex-row p-0 flex-wrap">
-          <h5 class="align-self-baseline me-2">Address:</h5>
-          <p class="align-self-baseline text-wrap"><%- trip.address -%></p>
-        </div>
-      </div>
-
-      <div class="container justify-content-between d-flex flex-row flex-wrap border-top pt-2">
-        <div class="d-inline-flex flex-row p-0 flex-wrap">
-          <h5 class="align-self-baseline me-2">Travelers:</h5>
-          <p class="align-self-baseline"><%= trip.guests %></p>
-        </div>
-
-        <div class="d-inline-flex flex-row p-0 flex-wrap">
-          <h5 class="align-self-baseline me-2">Reason:</h5>
-          <p class="align-self-baseline"><%= trip.reason %></p>
-        </div>
-
-        <div class="d-inline-flex flex-row p-0 flex-wrap">
-          <h5 class="align-self-baseline me-2">Transportation:</h5>
-          <p class="align-self-baseline"><%= trip.transportation %></p>
-        </div>
-      </div>
-    </div>
-    <%- include('../partials/modal_partials/edit-trip-partial') %>
 
     <!-- accommodations container -->
-    <div id="accommodations-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3 text-start" style="max-width: 45rem; font-size: 1rem;">
+    <div id="accommodations-container" class="container-sm d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3 text-start" style="max-width: 45rem; font-size: 1rem;">
       <!-- accommodations header -->
-      <div class="container d-inline-flex flex-row flex-wrap justify-content-between border-bottom mb-2 px-0">
-        <h3 class="align-self-baseline">Accommodations: <%- trip.accommodations.length -%></h3>
+      <div class="container d-inline-flex flex-row flex-wrap justify-content-between border-bottom mb-2 pb-2 px-0">
+        <h3 class="align-self-baseline mb-0">Accommodations:</h3>
         <%- include('../partials/modal_partials/add_accommodation_partial') %>
       </div>
 
@@ -68,21 +69,22 @@
     <!-- stops container -->
     <div id="stops-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
       <!-- stops header -->
-      <div class="container d-inline-flex flex-row flex-wrap justify-content-between border-bottom mb-2 px-0">
-        <h3 class="align-self-baseline">Stops: <%= trip.stops %></h3>
-        <a href="" class="text-decoration-none align-self-baseline">Add Stop Details</a>
+      <div class="container d-inline-flex flex-row flex-wrap justify-content-between border-bottom mb-2 pb-2 px-0">
+        <h3 class="align-self-baseline mb-0">Stops:</h3>
+        <%- include('../partials/modal_partials/add_stop_partial') %>
       </div>
 
       <!-- stops index -->
       <div>
-        <% if (trip.stops.length > 0) { %>
-          <% for (stop of trip.stops) { %>
-                <%- include('../partials/stops_partial.ejs') -%> 
+        <% if (trip.stops && trip.stops.length > 0) { %>
+          <% for (const currentStop of trip.stops) { %>
+            <%- include('../partials/stops_partial.ejs', { stop: currentStop }) -%> 
           <% } %>
         <% } else { %>
-                <p>No stops</p>
+          <p>No stops</p>
         <% } %>
       </div>
+      
     </div>
 
     <!-- packLists container -->

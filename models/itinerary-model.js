@@ -3,17 +3,22 @@ const mongoose = require('mongoose')
 const poiSchema = new mongoose.Schema({
   name: String,
   address: String,
+  arrival: String,
+  departure: String,
   phoneNumber: String,
   email: String,
   type: String,
-  interestLevel: String,
+  interest: String,
   transportation: String,
-  resNum: String
+  resNum: String,
+  notes: String
 }, {timestamps: true})
 
 const accommodationSchema = new mongoose.Schema({
   name: String,
   type: String,
+  checkIn: String,
+  checkOut: String,
   address: String,
   phoneNumber: String,
   email: String,
@@ -21,8 +26,15 @@ const accommodationSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 const stopSchema = new mongoose.Schema({
-  name: String,
-  stopDetails: [poiSchema]
+    stopName: String,
+    address: String,
+    arrival: String,
+    departure: String,
+    type: String,
+    transportation: String,
+    interest: String,
+    resNum: String,
+    notes: String
 }, {timestamps: true})
 
 const dateSchema = new mongoose.Schema({
@@ -77,7 +89,7 @@ const tripSchema = new mongoose.Schema({
     startDate: String,
     endDate: String,
     guests: String,
-    stops: [poiSchema],
+    stops: [stopSchema],
     reason: String,
     transportation: String,
     tripName: String,

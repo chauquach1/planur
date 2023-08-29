@@ -59,7 +59,7 @@ app.post('/:userId/trips', async (req, res) => {
     //parent.child.push | document.subdocument.push
     user.trips.push(newTrip)
     await user.save()
-    console.log(req.body)
+    console.log('NEW TRIP', newTrip)
     res.redirect(`/users/${user.id}`)
   } catch (err) {
     console.log(err.message)
@@ -69,21 +69,22 @@ app.post('/:userId/trips', async (req, res) => {
 
 // UPDATE ITINERARY (PUT)
 app.put('/:userId/trips/:tripsId', async (req, res) => {
-try {
+  try {
     const userId = req.params.userId;
     const tripsId = req.params.tripsId;
 
     const user = await User.findById(userId);
     const trip = user.trips.id(tripsId);
+
     if (!user) {
       return res.status(404).send('User not found');
     }
     
-    
     if (!trip) {
       return res.status(404).send('Trip not found');
     }
-    // Update trip details
+
+    // Update the properties of the trip on page browser
     trip.tripName = req.body.tripName;
     trip.startDate = req.body.startDate;
     trip.endDate = req.body.endDate;
@@ -93,9 +94,9 @@ try {
     trip.address = req.body.address;
     trip.transportation = req.body.transportation;
 
+    // Update trip document
     try {
-      const updatedTrip = await Trip.findOneAndUpdate(
-        { _id: tripsId },
+      const updatedTrip = await Trip.findByIdAndUpdate(tripsId,
         {
           tripName: req.body.tripName,
           startDate: req.body.startDate,
@@ -107,12 +108,10 @@ try {
           transportation: req.body.transportation
         },
         { new: true } // This option returns the updated document
-      ).exec();
-    
+      );
+
       if (updatedTrip) {
         console.log('Updated Trip:', updatedTrip);
-      } else {
-        console.log('Trip not found');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -121,7 +120,7 @@ try {
 
     await user.save();
 
-    res.redirect(`/users/${user.id}/trips/${trip.id}`)
+    res.redirect(`/users/${user.id}/trips/${trip.id}`);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('An error occurred');

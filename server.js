@@ -5,11 +5,16 @@ app.set('view engine', 'ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const PORT = 3000;
-const User = require('./models/itinerary-model').User
-const Trip = require('./models/itinerary-model').Trip
-const Stop = require('./models/itinerary-model').Stop
-const Accommodation = require('./models/itinerary-model').Accommodation
-const Poi = require('./models/itinerary-model').Poi
+const User = require('./models/itinerary-model').User;
+const Trip = require('./models/itinerary-model').Trip;
+const Stop = require('./models/itinerary-model').Stop;
+const Accommodation = require('./models/itinerary-model').Accommodation;
+const Poi = require('./models/itinerary-model').Poi;
+const Clothes = require('./models/itinerary-model').Clothes;
+const Luggage = require('./models/itinerary-model').Luggage;
+const Toiletries = require('./models/itinerary-model').Toiletries;
+const Miscellaneous = require('./models/itinerary-model').Miscellaneous;
+const EmergencyContact = require('./models/itinerary-model').EmergencyContact;
 
 
 // mongo
@@ -33,13 +38,13 @@ const tripsRouter = require('./controllers/trips_controller')
 const usersRouter = require('./controllers/users_controller')
 const detailsRouter = require('./controllers/accommodations_controller')
 const stopsRouter = require('./controllers/stops_controller')
-// const packListsRouter = require('./controllers/packing_lists_controller')
+const packListsRouter = require('./controllers/packing_lists_controller')
 
 app.use('/users', usersRouter);
 app.use('/users', tripsRouter);
 app.use('/users', detailsRouter);
 app.use('/users', stopsRouter);
-// app.use('/users', packListsRouter);
+app.use('/users', packListsRouter);
 
 
 // Render Dashboard
@@ -77,6 +82,11 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 // delete all stop documents
     // Stop.deleteMany({}).then((stops) => {
     //   console.log(stops);
+    //   db.close()
+    // })
+// delete all packing list documents
+    // PackingList.deleteMany({}).then((list) => {
+    //   console.log(list);
     //   db.close()
     // })
 //

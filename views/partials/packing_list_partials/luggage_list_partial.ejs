@@ -1,0 +1,12 @@
+<div id="luggageList" class="col col-lg col-sm border rounded m-2 p-2">
+    <% if(Object.values(trip.packLists.luggage).includes(true)) {%>
+        <label for="luggageList">Luggage:</label>
+        <ul id="luggageList" class="ps-4 mb-0">
+            <% for (const item of Object.keys(trip.packLists.luggage)) { %>
+                <% if (trip.packLists.luggage[item] === true) { %>
+                    <li class="text-capitalize"><%= item %></li>
+                <% } %>
+            <% } %>
+        </ul>
+    <% } %>
+</div>

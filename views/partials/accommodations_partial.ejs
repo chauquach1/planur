@@ -1,15 +1,10 @@
-<div class="container d-flex flex-column px-2 pb-2 mb-4 bg-secondary-subtle border rounded">
+<div class="container position-relative flex-column p-2 pt-3 mb-4 bg-secondary-subtle border rounded">
   
   <div class="align-items-baseline text-wrap flex-wrap">
     <p id="accomName" class="align-self-baseline m-0 fs-3 fw-bold text-info"><%- accommodation.name -%></p>
   </div>
   
   <div class="d-flex flex-row border-bottom border-black flex-wrap pb-2 mb-2">
-      <div class="d-inline-flex text-wrap flex-wrap me-4">
-        <label for="accomType" class="fw-bold me-2">Type:</label>
-        <p id="accomType" class="align-self-baseline my-0 fs-6"><%- accommodation.type -%></p>
-      </div>
-      
       <div class="d-inline-flex text-wrap flex-wrap me-4">
         <label for="checkIn" class="fw-bold me-2">Check In:</label>
         <p id="checkIn" class="align-self-baseline my-0 fs-6"><%- accommodation.checkIn -%></p>
@@ -21,26 +16,38 @@
       </div>
   </div>
 
-  <div class="d-inline-flex text-wrap flex-wrap">
-    <label for="accomAddress" class="fw-bold me-2">Address:</label>
-    <p id="accomAddress" class="align-self-baseline my-0 fs-6"><%- accommodation.address -%></p>
+  <div class="container d-md-none text-center">
+    <a class="fs-6 m-0 p-0  text-decoration-none text-center text-center text-secondary" data-bs-toggle="collapse" data-bs-target="#accomDetails" aria-expanded="false" aria-controls="collapseExample">
+      Accommodation Details
+    </a>  
   </div>
-  
-  <div class="d-flex flex-row flex-wrap">
-      <div class="d-inline-flex text-wrap flex-wrap me-4">
-        <label for="accomPhone" class="fw-bold me-2">Phone Number:</label>
-        <p id="accomPhone" class="align-self-baseline my-0 fs-6"><%- accommodation.phoneNumber -%></p>
-      </div>
-      
-      <div class="d-inline-flex text-wrap flex-wrap">
-        <label for="accomEmail" class="fw-bold me-2">Email:</label>
-        <p id="accomEmail" class="align-self-baseline my-0 fs-6"><%- accommodation.email -%></p>
-      </div>
+  <div id="accomDetails" class="container d-md-flex px-0 flex-column collapse">
+    <div class="d-inline-flex text-wrap flex-wrap me-4">
+      <label for="accomType" class="fw-bold me-2">Type:</label>
+      <p id="accomType" class="align-self-baseline my-0 fs-6"><%- accommodation.type -%></p>
+    </div>
+    <div class="d-inline-flex text-wrap flex-wrap">
+      <label for="accomAddress" class="fw-bold me-2">Address:</label>
+      <p id="accomAddress" class="align-self-baseline my-0 fs-6"><%- accommodation.address -%></p>
+    </div>
+    
+    <div class="d-flex flex-row flex-wrap">
+        <div class="d-inline-flex text-wrap flex-wrap me-4">
+          <label for="accomPhone" class="fw-bold me-2">Phone Number:</label>
+          <p id="accomPhone" class="align-self-baseline my-0 fs-6"><%- accommodation.phoneNumber -%></p>
+        </div>
+        
+        <div class="d-inline-flex text-wrap flex-wrap">
+          <label for="accomEmail" class="fw-bold me-2">Email:</label>
+          <p id="accomEmail" class="align-self-baseline my-0 fs-6"><%- accommodation.email -%></p>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-row text-wrap flex-wrap">
+      <label for="accomResNum" class="fw-bold me-2">Reservation/Confirmation Number: </label>
+      <p id="accomResNum" class="align-self-baseline my-0 fs-6"><%- accommodation.resNum -%></p>
+    </div>
   </div>
-  
-  <div class="d-flex flex-row text-wrap flex-wrap">
-    <label for="accomResNum" class="fw-bold me-2">Reservation/Confirmation Number: </label>
-    <p id="accomResNum" class="align-self-baseline my-0 fs-6"><%- accommodation.resNum -%></p>
-  </div>
+
   <%- include('./modal_partials/edit_accommodations_partial.ejs') %>
 </div>

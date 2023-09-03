@@ -1,15 +1,11 @@
-<div class="container d-flex flex-column px-2 pb-2 mb-4 bg-secondary-subtle border rounded">
+<div class="container position-relative d-flex flex-column px-2 pb-2 mb-4 bg-secondary-subtle border rounded">
     
   <div class="align-items-baseline text-wrap flex-wrap">
     <p id="stopName" class="align-self-baseline m-0 fs-3 fw-bold text-info"><%- stop.stopName -%></p>
   </div>
   
   <div class="d-flex flex-column border-bottom border-black flex-wrap pb-2 mb-2">
-      <div class="d-inline-flex text-wrap flex-wrap me-4">
-        <label for="stopAdd" class="fw-bold me-2">Address:</label>
-        <p id="stopAdd" class="align-self-baseline my-0 fs-6"><%- stop.address -%></p>
-      </div>
-      <div class="d-flex flex-row">
+    <div class="d-inline-flex text-wrap flex-wrap me-4">
         <div class="d-inline-flex text-wrap flex-wrap me-4">
           <label for="arrival" class="fw-bold me-2">Arrival:</label>
           <p id="arrival" class="align-self-baseline my-0 fs-6"><%- stop.arrival -%></p>
@@ -20,8 +16,24 @@
           <p id="departure" class="align-self-baseline my-0 fs-6"><%- stop.departure -%></p>
         </div>
       </div>
+      <div class="d-md-inline-flex d-none text-wrap flex-wrap me-4">
+        <label for="stopAdd" class="fw-bold me-2">Address:</label>
+        <p id="stopAdd" class="align-self-baseline my-0 fs-6"><%- stop.address -%></p>
+      </div>
   </div>
 
+  <div class="container d-md-none text-center">
+    <a class="fs-6 m-0 p-0  text-decoration-none text-center text-center text-secondary" data-bs-toggle="collapse" data-bs-target="#<%= stop.id %>-details" aria-expanded="false" aria-controls="collapseExample">
+      Stop Details
+    </a>  
+  </div>
+
+
+<div id="<%= stop.id %>-details" class="container d-md-flex px-0 flex-column collapse">
+  <div class="d-md-inline-flex text-wrap flex-wrap me-4">
+    <label for="stopAdd" class="fw-bold me-2">Address:</label>
+    <p id="stopAdd" class="align-self-baseline my-0 fs-6"><%- stop.address -%></p>
+  </div>
   <div class="d-inline-flex text-wrap flex-wrap">
     <label for="interest" class="fw-bold me-2">Interest Level:</label>
     <p id="interest" class="align-self-baseline my-0 fs-6"><%- stop.interest -%></p>
@@ -41,5 +53,6 @@
     <label for="stopNotes" class="fw-bold me-2">Notes:</label>
     <p id="stopNotes" class="align-self-baseline my-0 fs-6 text-wrap"><%- stop.notes -%></p>
   </div>
+</div>
   <%- include('./modal_partials/edit_stops_partial.ejs') %>
 </div>

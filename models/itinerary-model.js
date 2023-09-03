@@ -42,48 +42,46 @@ const dateSchema = new mongoose.Schema({
   departure: String
 }, {timestamps: true})
 
-const emergencyContactSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  phoneNumber: String,
-  email: String,
-  address: String,
-  relationship: String
-})
+const packListsSchema = new mongoose.Schema({
+  clothes:{
+      shirts :Boolean,
+      pants :Boolean,
+      shorts :Boolean,
+      sweater :Boolean,
+      underwear :Boolean
+  },
+  luggage:{
+      backpack: Boolean,
+      carryon: Boolean,
+      dufflebag: Boolean,
+      suitcase: Boolean,
+      garmentbag: Boolean
+  },
+  toiletries:{
+      toothbrush: Boolean,
+      toothpaste: Boolean,
+      shampoo: Boolean,
+      conditioner: Boolean,
+      sunscreen: Boolean
+  },
+  miscellaneous:{
+      cellphone: Boolean,
+      laptop: Boolean,
+      tablet: Boolean,
+      passport: Boolean,
+      medication: Boolean
+  },
+  emergencyContact: {
+    firstName: String,
+    lastName: String,
+    phoneNumber: String,
+    email: String,
+    address: String,
+    relationship: String
+  }
+},{timestamps: true})
 
-const clothesSchema = new mongoose.Schema({
-    shirts :Boolean,
-    pants :Boolean,
-    shorts :Boolean,
-    sweater :Boolean,
-    underwear :Boolean
-  }, {timestamps: true})
 
-const luggageSchema = new mongoose.Schema({
-  backpack: Boolean,
-  carryon: Boolean,
-  dufflebag: Boolean,
-  suitcase: Boolean,
-  garmentbag: Boolean
-
-}, {timestamps: true})
-
-const toiletriesSchema = new mongoose.Schema({
-  toothbrush: Boolean,
-  toothpaste: Boolean,
-  shampoo: Boolean,
-  conditioner: Boolean,
-  sunscreen: Boolean
-}, {timestamps: true})
-
-const miscellaneousSchema = new mongoose.Schema({
-  cellphone: Boolean,
-  laptop: Boolean,
-  tablet: Boolean,
-  passport: Boolean,
-  medication: Boolean
-
-}, {timestamps: true})
 
 
 const tripSchema = new mongoose.Schema({
@@ -97,7 +95,7 @@ const tripSchema = new mongoose.Schema({
     reason: String,
     transportation: String,
     tripName: String,
-    packLists: [clothesSchema, luggageSchema, toiletriesSchema, miscellaneousSchema, emergencyContactSchema]
+    packLists: packListsSchema
 }, {timestamps: true})
 
 const userSchema = new mongoose.Schema({
@@ -112,10 +110,6 @@ const Trip = mongoose.model('Trip', tripSchema)
 const Stop = mongoose.model('Stop', stopSchema)
 const Accommodation = mongoose.model('Accommodation', accommodationSchema)
 const Poi = mongoose.model('Poi', poiSchema)
-const Clothes = mongoose.model('Clothes', clothesSchema)
-const Luggage = mongoose.model('Luggage', luggageSchema)
-const Toiletries = mongoose.model('Toiletries', toiletriesSchema)
-const Miscellaneous = mongoose.model('Miscellaneous', miscellaneousSchema)
-const EmergencyContact = mongoose.model('EmergencyContact', emergencyContactSchema)
+const Packlists = mongoose.model('Packlists', packListsSchema)
 
-module.exports = {User, Trip, Stop, Accommodation, Poi, Clothes, Luggage, Toiletries, Miscellaneous, EmergencyContact}
+module.exports = {User, Trip, Stop, Accommodation, Poi, Packlists}

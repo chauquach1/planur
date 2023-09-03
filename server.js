@@ -10,11 +10,7 @@ const Trip = require('./models/itinerary-model').Trip;
 const Stop = require('./models/itinerary-model').Stop;
 const Accommodation = require('./models/itinerary-model').Accommodation;
 const Poi = require('./models/itinerary-model').Poi;
-const Clothes = require('./models/itinerary-model').Clothes;
-const Luggage = require('./models/itinerary-model').Luggage;
-const Toiletries = require('./models/itinerary-model').Toiletries;
-const Miscellaneous = require('./models/itinerary-model').Miscellaneous;
-const EmergencyContact = require('./models/itinerary-model').EmergencyContact;
+const Packlists = require('./models/itinerary-model').Packlists;
 
 
 // mongo

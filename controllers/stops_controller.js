@@ -80,7 +80,7 @@ app.put('/:userId/trips/:tripsId/stops/:stopId', async (req, res) => {
   try {
       const userId = req.params.userId;
       const tripsId = req.params.tripsId;
-      const stopId = req.params.stopId
+      const stopId = req.params.stopId;
   
       const user = await User.findById(userId);
       const trip = user.trips.id(tripsId);
@@ -94,7 +94,7 @@ app.put('/:userId/trips/:tripsId/stops/:stopId', async (req, res) => {
 
       const stop = trip.stops.id(req.params.stopId)
       if (!stop) {
-        return res.status(404).json({ error: 'Accommodation not found' });
+        return res.status(404).json({ error: 'Stop not found' });
       }
       // Update trip details
       stop.name = req.body.stopName;

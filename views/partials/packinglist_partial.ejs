@@ -1,3 +1,9 @@
-<div class="container">
-    <h3><%= trip.name %></h3>
-</div>
+<% const listsToIterate = ['clothes', 'luggage', 'toiletries', 'miscellaneous']; %>
+
+<% for (const listName of listsToIterate) { %>
+  <% const list = trip.packLists[listName]; %>
+  <% const hasTrueValue = Object.values(list).some(item => item === true); %>
+  <% if (hasTrueValue) { %>
+    <%- include(`./packing_list_partials/${listName}_list_partial.ejs`) %>
+  <% } %>
+<% } %>

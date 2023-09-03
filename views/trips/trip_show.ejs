@@ -1,45 +1,47 @@
 <%- include('../partials/top_body_partial.ejs') %>
 
-<div id="currTripContainer" class="container-fluid d-flex flex-column justify-content-center mt-5" >
-  <div id="trip-details-container" class="container d-flex flex-row flex-wrap border rounded justify-content-around p-0" style="max-width: 45rem; font-size: 1.2rem;">
-      <div class="container col text-center p-2 px-0 mb-2 bg-secondary-subtle" style="max-width: 45rem">
-        <h2 class="m-0"><%= trip.tripName %></h2>
+<div id="currTripContainer" class="container-fluid d-flex flex-column justify-content-center my-5" >
+  <div id="trip-details-container" class="container position-relative d-flex flex-row flex-wrap border rounded justify-content-around p-0 pt-3 bg-secondary-subtle shadow-sm" style="max-width: 45rem; font-size: 1.2rem;">
+      <%- include('../partials/modal_partials/edit-trip-partial') %>
+      <div class="container col rounded-top text-center p-2 mb-2 bg-secondary-subtle" style="max-width: 45rem">
+        <h2 class="m-0 text-break"><%= trip.tripName %></h2>
         <p class="m-0"><%= trip.startDate %> - <%= trip.endDate %></p>
       </div>
 
-      <div class="container d-flex flex-column flex-wrap mb-2 px-2">
+      <div class="container d-flex flex-column flex-wrap rounded-bottom p-2 pb-0 bg-light">
         <div class="col d-flex flex-row p-0 flex-wrap align-items-end">
           <label for="tripDest" class="fw-bold me-2 mb-0 fs-6">Destination:</label>
           <p id="tripDest" class="align-self-end my-0 fs-6"><%- trip.destination -%></p>
         </div>
       
-        <div class="col d-flex flex-row p-0 flex-wrap align-items-end">
+        <div class="col d-flex flex-row p-0 pb-2 mb-2 flex-wrap align-items-end border-bottom">
           <label for="tripAdd" class="fw-bold me-2 mb-0 fs-6">Address:</label>
-          <p id="tripAdd" class="align-self-end my-0 fs-6">10895 Vereda Sol Del Dios, San Diego, CA 92130</p>
+          <p id="tripAdd" class="align-self-end my-0 fs-6"><%- trip.address -%></p>
         </div>
-      </div>
 
-      <div class="container border-top pt-2 px-0 mb-2 mx-2">
-        <div class="row justify-content-around">
-          <div class="col-md d-flex flex-row">
-            <h5 class="align-self-baseline me-2 mb-0 fs-6">Travelers:</h5>
-            <p class="align-self-baseline mb-0 fs-6"><%= trip.guests %></p>
-          </div>
-      
-          <div class="col-md d-flex flex-row">
-            <h5 class="align-self-baseline me-2 mb-0 fs-6">Reason:</h5>
-            <p class="align-self-baseline mb-0 fs-6"><%= trip.reason %></p>
-          </div>
-      
-          <div class="col-md d-flex flex-row">
-            <h5 class="align-self-baseline me-2 mb-0 fs-6">Transportation:</h5>
-            <p class="align-self-baseline mb-0 fs-6"><%= trip.transportation %></p>
-          </div>
+        <a class="d-md-none fs-6 mb-1 text-decoration-none text-center text-secondary" data-bs-toggle="collapse" data-bs-target="#tripDetails2" aria-expanded="false" aria-controls="collapseExample">
+          Trip Details
+        </a>
+
+        <div id="tripDetails2" class="container d-md-flex flex-row align-items-baseline justify-content-around pb-2 px-0 mx-0 collapse">
+            <div class="col-md d-flex flex-row p-0">
+              <h5 class="align-self-baseline me-2 mb-0 fs-6">Travelers:</h5>
+              <p class="align-self-baseline mb-0 fs-6"><%= trip.guests %></p>
+            </div>
+        
+            <div class="col-md d-flex flex-row p-0">
+              <h5 class="align-self-baseline me-2 mb-0 fs-6">Reason:</h5>
+              <p class="align-self-baseline mb-0 fs-6"><%= trip.reason %></p>
+            </div>
+        
+            <div class="col-md d-flex flex-row p-0">
+              <h5 class="align-self-baseline me-2 mb-0 fs-6">Transportation:</h5>
+              <p class="align-self-baseline mb-0 fs-6"><%= trip.transportation %></p>
+            </div>
         </div>
       </div>
       
     </div>
-    <%- include('../partials/modal_partials/edit-trip-partial') %>
 </div>
 
 <!-- full trip details container -->
@@ -73,7 +75,6 @@
         <h3 class="align-self-baseline mb-0">Stops:</h3>
         <%- include('../partials/modal_partials/add_stop_partial') %>
       </div>
-
       <!-- stops index -->
       <div>
         <% if (trip.stops && trip.stops.length > 0) { %>
@@ -90,39 +91,25 @@
     <!-- packLists container -->
     <div id="packLists-container" class="container d-flex flex-column border rounded flex-wrap justify-content-around pt-3 mb-3" style="max-width: 45rem; font-size: 1rem;">
       <!-- packLists header -->
-      <div class="container d-inline-flex flex-row flex-wrap justify-content-between border-bottom mb-2 px-0">
-        <h3 class="align-self-baseline">Packing List: <%= trip.packingLists %></h3>
-        <%- include('../partials/modal_partials/add_packinglist_partial') %>
+      <div id="packLists-header" class="container d-inline-flex flex-row flex-wrap justify-content-between border-bottom mb-2 px-0">
+        <h3 class="align-self-baseline">Packing List:</h3>
+        <% if (trip.packLists) { %>
+            <%- include('../partials/modal_partials/edit_custom_packinglist_partial.ejs') %>
+          <% } else { %>
+            <%- include('../partials/modal_partials/add_custom_packinglist_partial') %>
+          <% } %>
       </div>
-
-      <!-- packLists index -->
-      <div>
-        <!-- <% if (Object.keys(trip.packLists).length > 0) { %>
-          <% for (categoryName in trip.packLists) { %>
-            <% const category = trip.packLists[categoryName]; %>
-            <h3><%= category %></h3>
-            <% for (itemName in category) { %>
-              <% if (category[itemName] === 'clothes' || category[itemName] === 'luggage' || category[itemName] === 'toiletries' || category[itemName] === 'miscellaneous') { %>
-                <p><%= category %></p>
-              <% } %>
-            <% } %>
+      <!-- packing lists index -->
+      <div id="packLists-index" class="container d-flex flex-row flex-wrap px-0 pb-2">
+        <% const listsToIterate = ['clothes', 'luggage', 'toiletries', 'miscellaneous']; %>
+        <% for (const listName of listsToIterate) { %>
+          <% const list = trip.packLists[listName]; %>
+          <% const hasTrueValue = Object.values(list).some(item => item === true); %>
+          <% if (hasTrueValue) { %>
+            <%- include(`../partials/packing_list_partials/${listName}_list_partial.ejs`) %>
           <% } %>
-        <% } else { %>
-          <p>No Packing List</p>
-        <% } %> -->
-        <% if (Object.keys(trip.packLists).length > 0) { %>
-          <% for (categoryName in trip.packLists) { %>
-            <% const category = trip.packLists[categoryName]; %>
-            <h3><%= category %></h3>
-          <% } %>
-        <% } else { %>
-          <p>No Packing List</p>
         <% } %>
       </div>
-      
     </div>
-
-
-</div>
 
 <%- include('../partials/bottom_and_footer_partial.ejs') %>

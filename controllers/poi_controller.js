@@ -164,29 +164,5 @@ app.delete('/:userId/trips/:tripsId/accommodations/:accomId', async (req, res) =
   }
 })
 
-// CREATE NEW STOP
-
-
-// CREATE NEW POI
-
-
-
-
-
-
-// UPDATE STOP
-
-
-// UPDATE POI
-
-
-
-
-
-
-
-
-
-
 
 module.exports = app

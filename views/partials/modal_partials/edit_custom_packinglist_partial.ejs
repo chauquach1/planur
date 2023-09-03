@@ -1,0 +1,77 @@
+<!-- edit packingLists modal trigger -->
+<section class="bg-light align-self-baseline">
+  <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#edit-packingLists-details-modal">
+    Edit Packing List
+  </a>
+</section>
+<!-- edit-packingLists-details modal -->
+<div class="modal fade" id="edit-packingLists-details-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title"> Add Packing Lists</h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/users/<%= user.id %>/trips/<%= trip.id %>/packLists/<%= trip.packLists.id %>?_method=PUT" method="POST">
+            <div class="d-flex flex-column">
+              
+              <!-- Clothes Check List -->
+              <div id="clothesCheckList" class="border rounded mb-3 p-2">
+                <h4>Clothes</h4>
+                <% const clothesItems = ['shirts', 'pants', 'shorts', 'sweater', 'underwear']; %>
+                <% for (const itemName of clothesItems) { %>
+                  <% const itemValue = trip.packLists.clothes[itemName]; %>
+                  <div class="flex-row">
+                    <label class="form-check-label text-capitalize" for="<%= itemName %>"><%= itemName %></label>
+                    <input type="checkbox" name="<%= itemName %>" <%= itemValue ? 'checked' : '' %> value="true">
+                  </div>
+                <% } %>
+              </div>
+              
+              <!-- Luggage Check List -->
+              <div id="luggageCheckList" class="border rounded mb-3 p-2">
+                <h4>Luggage</h4>
+                <% const luggageItems = ['backpack', 'carryon', 'dufflebag', 'suitcase', 'garmentbag']; %>
+                <% for (const itemName of luggageItems) { %>
+                  <% const itemValue = trip.packLists.luggage[itemName]; %>
+                  <div class="flex-row">
+                    <label class="form-check-label text-capitalize" for="<%= itemName %>"><%= itemName %></label>
+                    <input type="checkbox" name="<%= itemName %>" <%= itemValue ? 'checked' : '' %> value="true">
+                  </div>
+                <% } %>
+              </div>
+              
+              <!-- Toiletries Check List -->
+              <div id="toiletriesCheckList" class="border rounded mb-3 p-2">
+                <h4>Toiletries</h4>
+                <% const toiletriesItems = ['toothbrush', 'toothpaste', 'shampoo', 'conditioner', 'sunscreen']; %>
+                <% for (const itemName of toiletriesItems) { %>
+                  <% const itemValue = trip.packLists.toiletries[itemName]; %>
+                  <div class="flex-row">
+                    <label class="form-check-label text-capitalize" for="<%= itemName %>"><%= itemName %></label>
+                    <input type="checkbox" name="<%= itemName %>" <%= itemValue ? 'checked' : '' %> value="true">
+                  </div>
+                <% } %>
+              </div>
+              
+              <!-- Miscellaneous Check List -->
+              <div id="miscellaneousCheckList" class="border rounded mb-3 p-2">
+                <h4>Miscellaneous</h4>
+                <% const miscellaneousItems = ['cellphone', 'laptop', 'tablet', 'passport', 'medication']; %>
+                <% for (const itemName of miscellaneousItems) { %>
+                  <% const itemValue = trip.packLists.miscellaneous[itemName]; %>
+                  <div class="flex-row">
+                    <label class="form-check-label text-capitalize" for="<%= itemName %>"><%= itemName %></label>
+                    <input type="checkbox" name="<%= itemName %>" <%= itemValue ? 'checked' : '' %> value="true">
+                  </div>
+                <% } %>
+              </div>
+
+              <button class="btn btn-success" type="submit">Add Packing Lists</button>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>

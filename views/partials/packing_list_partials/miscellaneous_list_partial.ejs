@@ -1,0 +1,12 @@
+<div id="miscellaneousList" class="col col-lg col-sm border rounded m-2 p-2">
+    <% if(Object.values(trip.packLists.miscellaneous).includes(true)) {%>
+        <label for="miscellaneousList">Miscellaneous:</label>
+        <ul id="miscellaneousList" class="ps-4 mb-0">
+            <% for (const item of Object.keys(trip.packLists.miscellaneous)) { %>
+                <% if (trip.packLists.miscellaneous[item] === true) { %>
+                    <li class="text-capitalize"><%= item %></li>
+                <% } %>
+            <% } %>
+        </ul>
+    <% } %>
+</div>

@@ -4,6 +4,45 @@ const User = require('../models/itinerary-model').User;
 const Packlists = require('../models/itinerary-model').Packlists;
 
 
+app.get('/:userId/trips/:tripId/packLists/:packId', async (req, res) => {
+  try {
+      // Find the user by ID
+      const user = await User.findById(req.params.userId);
+      const trip = user.trips.id(req.params.tripId).populate('packLists');
+
+      // Handle cases where user or trip is not found
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+      
+      if (!trip) {
+          return res.status(404).json({ error: 'Trip not found' });
+      }
+
+      const packList = trip.packLists
+      if (!packList) {
+        return res.status(404).json({ error: 'Pack lists not found' });
+      }
+
+      const listsToIterate = ['clothes', 'luggage', 'toiletries', 'miscellaneous'];
+      for (const listName of listsToIterate) {
+        if (trip.packLists[listName]=== undefined) {
+          return
+        } else {
+        const list = trip.packLists[listName];
+        const hasTrueValue = Object.values(list).some(item => item === true);
+        if (hasTrueValue) {
+        }}
+      }
+
+      // Extract accommodations from the trip and render the view
+      return res.render('trips/trip_show.ejs', { trip, user });
+  } catch (err) {
+      // Handle errors and provide an appropriate response
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // GET ROUTE FOR ALL PACKING LISTS
 app.get('/:userId/trips/:tripId/packLists', async (req, res) => {

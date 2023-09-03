@@ -1,9 +1,26 @@
-<% const listsToIterate = ['clothes', 'luggage', 'toiletries', 'miscellaneous']; %>
+<form action="/users/:userId/trips/:tripId/packLists" method="GET">
+  <div id="packLists-index" class="container d-md-flex flex-row flex-wrap px-0 pb-2 collapse">
+    <% const listsToIterate = ['clothes', 'luggage', 'toiletries', 'miscellaneous']; %>
 
-<% for (const listName of listsToIterate) { %>
-  <% const list = trip.packLists[listName]; %>
-  <% const hasTrueValue = Object.values(list).some(item => item === true); %>
-  <% if (hasTrueValue) { %>
-    <%- include(`./packing_list_partials/${listName}_list_partial.ejs`) %>
-  <% } %>
-<% } %>
+    <% if (!trip.packLists || listsToIterate.every(listName => !trip.packLists[listName])) { %>
+      <p>No Packing Lists</p>
+    <% } else { %>
+      <% const allListsEmpty = listsToIterate.every(listName => {
+        const list = trip.packLists[listName];
+        return !list || Object.values(list).every(item => !item);
+      }); %>
+
+      <% if (allListsEmpty) { %>
+        <p>No Packing Lists</p>
+      <% } else { %>
+        <% for (const listName of listsToIterate) { %>
+          <% const list = trip.packLists[listName]; %>
+          <% const hasTrueValue = list && Object.values(list).some(item => item === true); %>
+          <% if (hasTrueValue) { %>
+            <%- include(`../partials/packing_list_partials/${listName}_list_partial.ejs`) %>
+          <% } %>
+        <% } %>
+      <% } %>
+    <% } %>
+  </div>
+</form>

@@ -100,16 +100,12 @@
           <% } %>
       </div>
       <!-- packing lists index -->
-      <div id="packLists-index" class="container d-flex flex-row flex-wrap px-0 pb-2">
-        <% const listsToIterate = ['clothes', 'luggage', 'toiletries', 'miscellaneous']; %>
-        <% for (const listName of listsToIterate) { %>
-          <% const list = trip.packLists[listName]; %>
-          <% const hasTrueValue = Object.values(list).some(item => item === true); %>
-          <% if (hasTrueValue) { %>
-            <%- include(`../partials/packing_list_partials/${listName}_list_partial.ejs`) %>
-          <% } %>
-        <% } %>
+      <div class="container d-md-none text-center">
+        <a class="fs-6 fw-light m-0 p-0 text-decoration-none text-center text-center text-secondary" data-bs-toggle="collapse" data-bs-target="#packLists-index" aria-expanded="false" aria-controls="collapseExample">
+          Packing Lists
+        </a>  
       </div>
+      <%- include('../partials/packinglist_partial.ejs') %>
     </div>
 
 <%- include('../partials/bottom_and_footer_partial.ejs') %>

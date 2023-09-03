@@ -23,14 +23,14 @@
   </div>
 
   <div class="container d-md-none text-center">
-    <a class="fs-6 m-0 p-0  text-decoration-none text-center text-center text-secondary" data-bs-toggle="collapse" data-bs-target="#<%= stop.id %>-details" aria-expanded="false" aria-controls="collapseExample">
+    <a class="fs-6 fw-light m-0 p-0 text-decoration-none text-center text-center text-secondary" data-bs-toggle="collapse" data-bs-target="#<%= stop.id %>-details" aria-expanded="false" aria-controls="collapseExample">
       Stop Details
     </a>  
   </div>
 
 
 <div id="<%= stop.id %>-details" class="container d-md-flex px-0 flex-column collapse">
-  <div class="d-md-inline-flex text-wrap flex-wrap me-4">
+  <div class="d-md-none text-wrap flex-wrap me-4">
     <label for="stopAdd" class="fw-bold me-2">Address:</label>
     <p id="stopAdd" class="align-self-baseline my-0 fs-6"><%- stop.address -%></p>
   </div>

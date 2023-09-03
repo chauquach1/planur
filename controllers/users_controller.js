@@ -5,7 +5,8 @@ const Trip = require('../models/itinerary-model').Trip
 
 // NEW USER FORM
 app.get('/new', (req, res) => {
-  res.render('users/new.ejs')
+  let user = {}
+  res.render('users/new.ejs', {user})
 })
 
 

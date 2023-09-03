@@ -1,10 +1,10 @@
-<div id="clothesList" class="col col-lg col-sm border rounded m-2 p-2">
+<div id="clothesList" class="col col-lg col-sm border rounded m-2 p-2" style="max-width: 15rem;">
   <% if (Object.values(trip.packLists.clothes).includes(true)) { %>
       <label for="clothesList">Clothes:</label>
       <ul id="clothesList" class="ps-4 mb-0">
         <% for (const item of Object.keys(trip.packLists.clothes)) { %>
             <% if (trip.packLists.clothes[item] === true) { %>
-                <li class="text-capitalize"><%= item %></li>
+                <li class="text-capitalize text-break"><%= item %></li>
             <% } %>
         <% } %>
     </ul>

@@ -44,10 +44,10 @@ app.use('/users', packListsRouter);
 
 
 // Render Dashboard
-app.get('/users', (req, res) => {
-    const user = {};
-    res.render('home.ejs', {user})
-})
+// app.get('/users', (req, res) => {
+//     const user = {};
+//     res.render('home.ejs', {user})
+// })
 
 app.get('/', (req, res) => {
     const user = {};

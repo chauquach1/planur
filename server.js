@@ -4,7 +4,7 @@ const app = express();
 app.set('view engine', 'ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const PORT = 3000 || process.env.port;
+const PORT = process.env.port;
 const User = require('./models/itinerary-model').User;
 const Trip = require('./models/itinerary-model').Trip;
 const Stop = require('./models/itinerary-model').Stop;
